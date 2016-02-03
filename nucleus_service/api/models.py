@@ -143,3 +143,16 @@ class ComputeSet(models.Model):
 
     class Meta:
         managed = True
+
+# #################################################
+#  Network
+# #################################################
+class Switch(models.Model):
+    name = models.CharField(max_length=30)
+    ipaddr = models.GenericIPAddressField(protocol='IPv4', blank=True, null=True)
+
+
+class NetworkPort(models.Model):
+    hostname = models.CharField(max_length=20)
+    switch = models.ForeignKey(Switch, on_delete=models.CASCADE, blank=True, null=True)
+    port = models.CharField(max_length=10)
